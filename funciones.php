@@ -1,17 +1,8 @@
 <?php
-//CONECTAR A LA BASE
-function conectarDB() {
-    $conn = mysqli_connect("localhost", "root","", "agenda_personal", 3307);
-    if (!$conn) {
-        die("Error de conexion: " . mysqli_connect_error());
-
-    }
-    return $conn;
-}
 //LIMPIAR DATOS
 function limpiarDato($dato){
     $dato = trim($dato);
-    $dato = htmlspecialchars($dato, ENT_QUOTES,"UTF-8");
+    $dato = htmlspecialchars($dato, ENT_QUOTES, "UTF-8");
     return $dato;
 }
 
@@ -43,13 +34,4 @@ function contarContactos($conn){
     }
     return $total;
 }
-
-
-
-
-
-
-
-
-
 ?>

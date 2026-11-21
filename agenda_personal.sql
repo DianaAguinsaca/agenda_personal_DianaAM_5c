@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3307
--- Tiempo de generación: 15-11-2026 a las 16:34:06
+-- Tiempo de generación: 21-11-2026 a las 17:39:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -41,8 +41,10 @@ CREATE TABLE `contactos` (
 --
 
 INSERT INTO `contactos` (`id`, `id_usuario`, `nombre`, `telefono`, `correo`, `ciudad`) VALUES
-(2, 10, 'Maria Gordillo', '0959067983', 'mariamaza@gmail.com', 'Loja'),
-(4, 11, 'Giovanny Aguinsaca', '0959458323', 'aguinsacageovanny67@gmail.com', 'Loja');
+(16, 19, 'Diego Saquizari', '0989765674', 'diegosaquizari@gmail.com', 'Catamayo'),
+(17, 19, 'Pedro Saquizari', '0934567967', 'pedrosaquizari@gmai.com', 'Catamayo'),
+(18, 21, 'Gladys Ortega', '0967454892', 'gladysortega@gmail.com', 'Loja'),
+(20, 21, 'Sandra Fierro', '0975867443', 'sandrafierro@gmail.com', 'Loja');
 
 -- --------------------------------------------------------
 
@@ -63,8 +65,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `nombre`, `correo`, `password`, `fecha_registro`) VALUES
-(10, 'Misehll', 'mishellaguinsaca24@gmail.com', '$2y$10$AbU7UQ6M/lNgOR/tk72cj.1LKOW/7Rgw2ZFWJSGDhppSDt4voJIem', '2026-11-15 14:33:53'),
-(11, 'Diana Aguinsaca', 'dianitaaguinsaca@gmail.com', '$2y$10$s5pDKbDeQPeVl/gICbmcVOOujr1mnmmSaok3eVaqTimHHE7kdPbB2', '2026-11-15 14:51:45');
+(19, 'Giovanny Aguinsaca', 'giovannyaguinsaca@gmail.com', '$2y$10$UwKL9PXyW9l52.NVLnfzr.crKg2F3JWNtOO60b6Cluqcz.cObXxha', '2026-11-21 16:32:35'),
+(21, 'Maria Maza', 'mariamazza@gmail.com', '$2y$10$dg4fU6e.cLZzzr2TWnTBJeqntfP0SNo/7opRPAfywKlJrgPYFKfjC', '2026-11-21 16:36:07');
 
 --
 -- Índices para tablas volcadas
@@ -92,13 +94,13 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `contactos`
 --
 ALTER TABLE `contactos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Restricciones para tablas volcadas

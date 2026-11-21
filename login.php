@@ -1,4 +1,5 @@
 <?php
+include("conexion.php");
 include("funciones.php");
 include("sesiones.php");
 
@@ -9,8 +10,11 @@ if (isset($_POST['login'])) {
     $correo = limpiarDato($_POST['correo']);
     $password = $_POST['password'];
 
-    $resultado = mysqli_query($conn, "SELECT * FROM usuarios WHERE correo = '$correo'");
-    $usuario = mysqli_fetch_assoc($resultado);
+    $stmt = $conn->prepare("SELECT * FROM usuarios WHERE correo = ?");
+    $stmt->bind_param("s", $correo);
+    $stmt->execute();
+    $resultado = $stmt->get_result();
+    $usuario = $resultado->fetch_assoc();
 
     if ($usuario && password_verify($password, $usuario['password'])) {
         $_SESSION['id_usuario'] = $usuario['id'];

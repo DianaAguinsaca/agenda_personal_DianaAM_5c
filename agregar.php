@@ -3,6 +3,7 @@
 //  PARTE 1: LO QUE NO SE VE - PHP
 // ==========================================
 
+include("conexion.php");
 include("funciones.php");
 include("sesiones.php");
 verificarSesion();
@@ -15,10 +16,10 @@ if (isset($_POST['guardar'])) {
 
 
     $id_usuario = $_SESSION['id_usuario'];
-    $nombre = limpiarDato($_POST['Nombre']);
+    $nombre = limpiarDato($_POST['nombre']);
     $telefono = limpiarDato($_POST['telefono']);
-    $correo = limpiarDato($_POST['Correo']);
-    $ciudad = limpiarDato($_POST['Ciudad']);
+    $correo = limpiarDato($_POST['correo']);
+    $ciudad = limpiarDato($_POST['ciudad']);
 
     if (empty($nombre) || empty($telefono) || empty($correo) || empty($ciudad)) {
     $mensaje = "Todos los campos son obligatorios.";
@@ -27,10 +28,15 @@ if (isset($_POST['guardar'])) {
     } else
     {
 
-    mysqli_query($conn, "INSERT INTO contactos (id_usuario, nombre, telefono, correo, ciudad) VALUES ('$id_usuario', '$nombre', '$telefono', '$correo', '$ciudad')");
-
+    $stmt = $conn->prepare("INSERT INTO contactos (id_usuario, nombre, telefono, correo, ciudad) VALUES (?, ?, ?, ?, ?)");
+$stmt->bind_param("issss", $id_usuario, $nombre, $telefono, $correo, $ciudad);
+if ($stmt->execute()) {
     $mensaje = "Contacto guardado";
-    }
+} else {
+    $mensaje = "Error al guardar: " . $stmt->error;
+}
+$stmt->close();
+ }
 }
 ?>
 
@@ -67,16 +73,16 @@ if (isset($_POST['guardar'])) {
                         <form method="POST">
 
                             <label>nombre:</label>
-                            <input type="text" name="Nombre" class="form-control mb-3" required>
+                            <input type="text" name="nombre" class="form-control mb-3" required>
 
                             <label> telefono:</label>
                             <input type="text" name="telefono" class="form-control mb-3" required>
 
                             <label> correo :</label>
-                            <input type="text" name="Correo" class="form-control mb-3" required>
+                            <input type="text" name="correo" class="form-control mb-3" required>
 
                             <label> ciudad :</label>
-                            <input type="text" name=" Ciudad" class="form-control mb-3" required>
+                            <input type="text" name=" ciudad" class="form-control mb-3" required>
 
                             <button name="guardar" class="btn btn-success w-100">Guardar</button>
                         </form>

@@ -46,8 +46,8 @@ De esta forma siempre sabemos con quiénes estamos trabajando, a quiénes les en
 
 ## Pasos para instalar la aplicación
 1. Copiar la carpeta del proyecto en la carpeta htdocs de XAMPP
-2. Abrir phpMyAdmin y crear la base de datos
-3. Importar el archivo agenda_verde.sql
+2. Abrir phpMyAdmin y crear la base de datos agenda_personal
+3. Importar el archivo agenda_personal.sql
 4. Abrir en el navegador: localhost/agenda_personal_Diana AM_5c
 5. Registrarse con un usuario nuevo e iniciar sesión
 6. Cerrar sesion

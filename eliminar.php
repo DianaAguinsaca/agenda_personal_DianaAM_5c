@@ -8,10 +8,15 @@ if (!isset($_SESSION['id_usuario'])) {
 }
 
 $id_usuario = $_SESSION['id_usuario'];
-$id = $_GET['id'];
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-$sql = "DELETE FROM contactos WHERE id='$id' AND id_usuario='$id_usuario'";
-mysqli_query($conexion, $sql);
+if ($id > 0) {
+    $conexion = conectarDB();
+    $stmt = $conexion->prepare("DELETE FROM contactos WHERE id = ? AND id_usuario = ?");
+    $stmt->bind_param("ii", $id, $id_usuario);
+    $stmt->execute();
+    $stmt->close();
+}
 
 header("Location: dashboard.php");
 exit();

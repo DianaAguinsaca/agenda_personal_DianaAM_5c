@@ -1,18 +1,24 @@
 <?php
-include "conexion.php";
+include("conexion.php");
+$conexion = conectarDB();
 $mensaje = "";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = $_POST["nombre"];
-    $correo = $_POST["correo"];
-    $clave = $_POST["password"];
-    $clave = password_hash($clave,PASSWORD_DEFAULT);
 
-    $ver = $conexion->query("SELECT * FROM usuarios WHERE correo='$correo'");
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nombre = trim($_POST["nombre"]);
+    $correo = trim($_POST["correo"]);
+    $clave = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
+    $stmt = $conexion->prepare("SELECT * FROM usuarios WHERE correo = ?");
+    $stmt->bind_param("s", $correo);
+    $stmt->execute();
+    $ver = $stmt->get_result();
+
     if ($ver->num_rows > 0) {
-        $mensaje = "No se pudo registrar. Intenta con otro correo o inicia sesión.";
+        $mensaje = "No se pudo registrar. Intenta con otro correo o inicia sesión";
     } else {
-        $sql = "INSERT INTO usuarios (nombre, correo, password) VALUES ('$nombre', '$correo', '$clave')";
-        if ($conexion->query($sql)) {
+        $stmt2 = $conexion->prepare("INSERT INTO usuarios (nombre, correo, password) VALUES (?, ?, ?)");
+        $stmt2->bind_param("sss", $nombre, $correo, $clave);
+        if ($stmt2->execute()) {
             header("Location: login.php");
             exit();
         } else {
